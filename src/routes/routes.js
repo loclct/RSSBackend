@@ -40,6 +40,12 @@ routes.get("/projects/:id", getProjectDetailById);
 routes.patch("/projects/:id", updateProjectById);
 routes.delete("/projects/:id", deleteProjectById);
 
+// LABLE
+
+// MILESTONE
+
+//
+
 // SOMETHING ELSE
 
 export default routes;
