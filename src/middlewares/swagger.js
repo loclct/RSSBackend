@@ -1,22 +1,17 @@
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-const option = {
-  definition: {},
-};
 
-import swaggerJsdoc from "swagger-jsdoc";
-import swaggerUi from "swagger-ui-express";
 const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Mini Blog API",
+      title: "Report sorfware system",
       description:
-        "API endpoints for a mini blog services documented on swagger",
+        "API endpoints for a report sorfware system services documented on swagger",
       contact: {
-        name: "Desmond Obisi",
-        email: "info@miniblog.com",
-        url: "https://github.com/DesmondSanctity/node-js-swagger",
+        name: "Le Cao Tan Loc",
+        email: "lecaotanlocvms153@gmail.com",
+        url: "https://github.com/loclct/RSSBackend.git",
       },
       version: "1.0.0",
     },
@@ -31,7 +26,6 @@ const options = {
       },
     ],
   },
-  // looks for configuration in specified directories
   apis: ["./router/*.js"],
 };
 const swaggerSpec = swaggerJsdoc(options);
