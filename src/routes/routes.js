@@ -18,6 +18,13 @@ import {
   getProjectDetailById,
   updateProjectById,
 } from "../services/project.js";
+import { getAllCollaboratorFromRepo } from "../services/collaborator.js";
+import {
+  createMilestone,
+  deleteMilestone,
+  getAllMilestoneInARepo,
+  updateMilestone,
+} from "../services/milestone.js";
 
 const routes = Router();
 
@@ -40,10 +47,16 @@ routes.get("/projects/:id", getProjectDetailById);
 routes.patch("/projects/:id", updateProjectById);
 routes.delete("/projects/:id", deleteProjectById);
 
+// COLLABORATOR
+routes.get("/repos/:owner/:repo/collaborator", getAllCollaboratorFromRepo);
+
 // LABLE
 
 // MILESTONE
-
+routes.get("/repos/:owner/:repo/milestones", getAllMilestoneInARepo);
+routes.post("/repos/:owner/:repo/milestones", createMilestone);
+routes.patch("/repos/:owner/:repo/milestones/:issue_number", updateMilestone);
+routes.delete("/repos/:owner/:repo/milestones/:issue_number", deleteMilestone);
 //
 
 // SOMETHING ELSE

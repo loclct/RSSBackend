@@ -3,10 +3,20 @@ import octokit from "../configs/octokit.js";
 const getAllProjectFromARepo = async (req, res) => {
   const { owner, repo } = req.params;
   try {
-    const response = await octokit.rest.projects.listForRepo({
-      owner,
-      repo,
-    });
+    // const response = await octokit.rest.projects.listForUser({
+    //   owner,
+    //   repo,
+    // });
+    const response = await octokit.request(
+      `GET /repos/${owner}/${repo}/projects`,
+      {
+        owner: owner,
+        repo: repo,
+        headers: {
+          "X-GitHub-Api-Version": "2022-11-28",
+        },
+      }
+    );
     res.json(response.data);
   } catch (error) {
     res.status(500).json({ error: error.message });

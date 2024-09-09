@@ -3,6 +3,9 @@
 //     "state": "open",
 //     "description": "Version 1.0 milestone",
 //     "due_on": "2024-12-31T23:59:59Z"
+
+import octokit from "../configs/octokit.js";
+
 //   }
 export const createMilestone = async (req, res) => {
   const { owner, repo } = req.params;
@@ -70,10 +73,16 @@ export const getAllMilestoneInARepo = async (req, res) => {
   const { owner, repo } = req.params;
 
   try {
-    const response = await octokit.rest.issues.listMilestones({
-      owner,
-      repo,
-    });
+    const response = await octokit.request(
+      `GET /repos/${owner}/${repo}/milestones`,
+      {
+        owner: owner,
+        repo: repo,
+        headers: {
+          "X-GitHub-Api-Version": "2022-11-28",
+        },
+      }
+    );
     res.json(response.data);
   } catch (error) {
     res.status(500).json({ error: error.message });
