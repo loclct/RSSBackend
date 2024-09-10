@@ -6,7 +6,6 @@
 
 import octokit from "../configs/octokit.js";
 
-//   }
 export const createMilestone = async (req, res) => {
   const { owner, repo } = req.params;
   const { title, state, description, due_on } = req.body;
@@ -83,6 +82,28 @@ export const getAllMilestoneInARepo = async (req, res) => {
         },
       }
     );
+    res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+export const getAMilestoneById = async (req, res) => {
+  const { owner, repo, milestone_number } = req.params;
+  try {
+    const response = await octokit.request(
+      `GET /repos/${owner}/${repo}/milestones/${milestone_number}`,
+      {
+        owner: owner,
+        repo: repo,
+        milestone_number: milestone_number,
+        headers: {
+          "X-GitHub-Api-Version": "2022-11-28",
+        },
+      }
+    );
+    if (response.status === 404) res.json({ message: "Resource not found" });
     res.json(response.data);
   } catch (error) {
     res.status(500).json({ error: error.message });

@@ -3,6 +3,7 @@ import {
   createNewRepo,
   deleteRepo,
   getAllRepo,
+  getRepoByName,
   updateRepo,
 } from "../services/repo.js";
 import {
@@ -23,6 +24,7 @@ import {
   createMilestone,
   deleteMilestone,
   getAllMilestoneInARepo,
+  getAMilestoneById,
   updateMilestone,
 } from "../services/milestone.js";
 
@@ -30,6 +32,7 @@ const routes = Router();
 
 // REPO
 routes.get("/repos", getAllRepo);
+routes.get("/repos/:owner/:repo", getRepoByName);
 routes.post("/repos", createNewRepo);
 routes.patch("/repos/:owner/:repo", updateRepo);
 routes.delete("/repos/:owner/:repo", deleteRepo);
@@ -54,9 +57,19 @@ routes.get("/repos/:owner/:repo/collaborator", getAllCollaboratorFromRepo);
 
 // MILESTONE
 routes.get("/repos/:owner/:repo/milestones", getAllMilestoneInARepo);
+routes.get(
+  "/repos/:owner/:repo/milestones/:milestone_number",
+  getAMilestoneById
+);
 routes.post("/repos/:owner/:repo/milestones", createMilestone);
-routes.patch("/repos/:owner/:repo/milestones/:issue_number", updateMilestone);
-routes.delete("/repos/:owner/:repo/milestones/:issue_number", deleteMilestone);
+routes.patch(
+  "/repos/:owner/:repo/milestones/:milestone_number",
+  updateMilestone
+);
+routes.delete(
+  "/repos/:owner/:repo/milestones/:milestone_number",
+  deleteMilestone
+);
 //
 
 // SOMETHING ELSE
