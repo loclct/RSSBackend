@@ -11,8 +11,12 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 app.use(express.json());
-app.use(cors());
-app.use(morgan("tiny"));
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+app.use(morgan("dev"));
 app.use("/api", routes);
 swaggerDocs(app);
 const {
